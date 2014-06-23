@@ -2,3 +2,6 @@
 /target
 .settings/
 *.versionsBackup
+/out
+/.idea
+*.iml
