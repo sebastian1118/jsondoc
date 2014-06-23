@@ -1,5 +1,8 @@
 package org.jsondoc.core.pojo;
 
+import org.jsondoc.core.annotation.ApiObjectField;
+import org.jsondoc.core.util.JSONDocUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -7,9 +10,6 @@ import java.lang.reflect.WildcardType;
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
-
-import org.jsondoc.core.annotation.ApiObjectField;
-import org.jsondoc.core.util.JSONDocUtils;
 
 public class ApiObjectFieldDoc {
 	public String jsondocId = UUID.randomUUID().toString();
@@ -50,7 +50,7 @@ public class ApiObjectFieldDoc {
 				mapKeyClazz = (Class<?>) mapKeyType;
 				mapValueClazz = (Class<?>) mapValueType;
 			}
-			return new String[] { JSONDocUtils.getObjectNameFromAnnotatedClass(field.getType()), (mapKeyClazz != null) ? mapKeyClazz.getSimpleName().toLowerCase() : null, (mapValueClazz != null) ? mapValueClazz.getSimpleName().toLowerCase() : null, "map" };
+			return new String[] { JSONDocUtils.getObjectNameFromAnnotatedClass(field.getType()), (mapKeyClazz != null) ? mapKeyClazz.getSimpleName().toLowerCase() : null, (mapValueClazz != null) ? JSONDocUtils.getObjectNameFromAnnotatedClass(mapValueClazz) : null, "map" };
 
 		} else if (Collection.class.isAssignableFrom(field.getType())) {
 			if (field.getGenericType() instanceof ParameterizedType) {
